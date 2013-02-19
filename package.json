@@ -1,0 +1,41 @@
+{
+  "name": "grunt-chmod",
+  "description": "A Grunt task plugin to modify file permissions, a la `chmod`.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/JamesMGreene/grunt-chmod",
+  "author": {
+    "name": "James M. Greene",
+    "email": "james.m.greene@gmail.com",
+    "url": "http://jamesgreene.net/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JamesMGreene/grunt-chmod.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesMGreene/grunt-chmod/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/JamesMGreene/grunt-chmod/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "chmod"
+  ]
+}
