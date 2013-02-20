@@ -86,14 +86,17 @@ grunt.initConfig({
 ```
 
 ### Warnings
- - On Windows (tested with Windows 7), the only possible values seem to be '666'(read/write for all users) or '444' (read only for all users). Whatever number is set in the user column (the hundreds place value) will become the value for all columns (user, group, and other), e.g. '400' becomes '444'.
+ - On Windows (tested with Windows 7), the only possible values seem to be `'666'`(read/write for all users) or `'444'` (read
+   only for all users). Whatever number is set in the user column (the hundreds place value) will become the value for all
+   columns (user, group, and other), e.g. `'400'` becomes `'444'`.  The default permissons for both newly created files and
+   folders is `'666'`.
 
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
- - 1.0.2: Published to NPM on 2013-02-20.
+ - 1.0.3: Published to NPM on 2013-02-20.
      - Initial release, plus fixed tests and README.
  
 ## License
