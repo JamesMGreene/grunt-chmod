@@ -1,0 +1,12 @@
+[
+  {
+    "name": "chmod.error",
+    "args": [
+      "No `mode` was specified in the task `options`. Task failed!"
+    ]
+  },
+  {
+    "name": "chmod.fail",
+    "args": []
+  }
+]

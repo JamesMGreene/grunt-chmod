@@ -26,44 +26,29 @@ In your project's Gruntfile, add a section named `chmod` to the data object pass
 grunt.initConfig({
   chmod: {
     options: {
-      // Task-specific options go here.
+      mode: '755'
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-})
+    yourTarget1: {
+      // Target-specific file/dir lists and/or options go here.
+      src: ['**/*.js']
+    }
+  }
+});
 ```
 
 ### Options
 
-#### options.separator
+#### options.mode
 Type: `String`
-Default value: `',  '`
+Default value: _none_ (required)
 
-A string value that is used to do something with whatever.
+A string value to specify the permissions' [numeric mode](http://ss64.com/bash/chmod.html) to set on the files and/or directories, e.g.:
+ - `'755'`
+ - `'644'`
+ - `'400'`
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
 
 ### Usage Examples
-
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  chmod: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
 
 #### Custom Options
 In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
@@ -72,18 +57,42 @@ In this example, custom options are used to do something else with whatever else
 grunt.initConfig({
   chmod: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      mode: '755'
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    yourTarget1: {
+      // For '.js' files anywhere under the directory that contains this 'Gruntfile.js' file,
+      // set the files permissions so that everyone can read and execute the files but only the
+      // owner can write to the files.
+      src: ['**/*.js']
     },
-  },
-})
+    yourTarget2: {
+      // For '.json' files anywhere under the 'src' or 'test' directories, set the file permissions
+      // so that everyone can read the files but only the owner can write to the files.
+      options: {
+        mode: '644'
+      },
+      src: ['src/**/*.json', 'test/**/*.json']
+    },
+    yourTarget3: {
+      // For the 'node_modules' directory, set the directory permissions so that only the owner has
+      // read permissions.
+      options: {
+        mode: '400'
+      },
+      src: ['node_modules/']
+    }
+  }
+});
 ```
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+ - 1.0.0: Published to NPM on 2013-02-19.
+     - Initial release, with tests.
+ 
+## License
+Copyright (c) 2013 James M. Greene  
+Licensed under the MIT license.

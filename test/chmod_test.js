@@ -1,26 +1,7 @@
 'use strict';
 
 var grunt = require('grunt');
-
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
-
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
+var helpers = require('./helpers');
 
 exports.chmod = {
   setUp: function(done) {
@@ -31,9 +12,9 @@ exports.chmod = {
   default_options: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/actual/default_options.json');
+    var actual = grunt.file.readJSON('tmp/default_options.json');
     var expected = grunt.file.readJSON('test/expected/default_options.json');
-    test.deepEqual(actual, expected, 'Task should have failed when relying on the default options.');
+    test.deepEqual(actual, expected, 'Task should fail when relying on the default options.');
 
     test.done();
   },
@@ -41,9 +22,9 @@ exports.chmod = {
   custom_options_without_string_mode: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/actual/custom_options_without_string_mode.json');
+    var actual = grunt.file.readJSON('tmp/custom_options_without_string_mode.json');
     var expected = grunt.file.readJSON('test/expected/custom_options_without_string_mode.json');
-    test.deepEqual(actual, expected, 'should describe what the custom option(s) behavior is.');
+    test.deepEqual(actual, expected, 'Task should fail when setting a non-string `mode` on the custom options.');
 
     test.done();
   },
@@ -51,9 +32,9 @@ exports.chmod = {
   custom_options_with_empty_mode: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/actual/custom_options_with_empty_mode.json');
+    var actual = grunt.file.readJSON('tmp/custom_options_with_empty_mode.json');
     var expected = grunt.file.readJSON('test/expected/custom_options_with_empty_mode.json');
-    test.deepEqual(actual, expected, 'should describe what the custom option(s) behavior is.');
+    test.deepEqual(actual, expected, 'Task should fail when setting an empty string `mode` on the custom options.');
 
     test.done();
   },
@@ -61,20 +42,55 @@ exports.chmod = {
   custom_options_with_invalid_mode: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/actual/custom_options_with_invalid_mode.json');
+    var actual = grunt.file.readJSON('tmp/custom_options_with_invalid_mode.json');
     var expected = grunt.file.readJSON('test/expected/custom_options_with_invalid_mode.json');
-    test.deepEqual(actual, expected, 'should describe what the custom option(s) behavior is.');
+    test.deepEqual(actual, expected, 'Task should fail when setting an invalid string `mode` on the custom options.');
 
     test.done();
   },
   
-  custom_options: function(test) {
+  custom_options_nonexistent_file: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/actual/custom_options.json');
-    var expected = grunt.file.readJSON('test/expected/custom_options.json');
-    test.deepEqual(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var actual = grunt.file.readJSON('tmp/custom_options_nonexistent_file.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_nonexistent_file.json');
+    test.deepEqual(actual, expected, 'Task should pass but not modify any file permissions when there are no files that match.');
+
+    test.done();
+  },
+  
+  custom_options_file: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/custom_options_file.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_file.json');
+    test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
+    
+    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var numericMode = helpers.permsFromMode(rawMode);
+    
+    var actualPerms = '' + numericMode;
+    var expectedPerms = '444';
+    test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
+
+    test.done();
+  },
+  
+  custom_options_dir: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/custom_options_dir.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_dir.json');
+    test.deepEqual(actual, expected, 'Task should pass and modify the directory permissions of all directories that match.');
+    
+    var rawMode = require('fs').statSync('tmp/custom_options_dir/').mode;
+    var numericMode = helpers.permsFromMode(rawMode);
+    
+    var actualPerms = '' + numericMode;
+    var expectedPerms = '444';
+    test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
 
     test.done();
   }
+
 };

@@ -30,55 +30,57 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     chmod: {
+      // Emit events, JUST for testing purposes!
+      options: {
+        emit: true
+      },
       default_options: {
-        options: {
-          emit: true
-        },
-        files: ['tmp/default_options.json']
+        src: ['tmp/default_options.txt']
       },
       custom_options_without_string_mode: {
         options: {
-          mode: {},
-          emit: true
+          mode: {}
         },
-        files: ['tmp/custom_options_without_string_mode.json']
+        src: ['tmp/custom_options_without_string_mode.txt']
       },
       custom_options_with_empty_mode: {
         options: {
-          mode: '',
-          emit: true
+          mode: ''
         },
-        files: ['tmp/custom_options_with_empty_mode.json']
+        src: ['tmp/custom_options_with_empty_mode.txt']
       },
       custom_options_with_invalid_mode: {
         options: {
-          mode: '',
-          emit: true
+          mode: 'a+rwx'
         },
-        files: ['tmp/custom_options_with_invalid_mode.json']
+        src: ['tmp/custom_options_with_invalid_mode.txt']
+      },
+      custom_options_nonexistent_file: {
+        options: {
+          mode: '600'
+        },
+        src: ['tmp/custom_options_nonexistent_file.txt']
       },
       custom_options_file: {
         options: {
-          mode: 'go-rwx',
-          emit: true
+          /* Because it seems Windows will set the U digit (UGO) for all spots, so '400' => '444'. Default on Windows is: '666' */
+          mode: '444'
         },
-        files: ['tmp/custom_options_file.json']
+        src: ['tmp/custom_options_file.js']
       },
       custom_options_dir: {
         options: {
-          mode: 'go-rwx',
-          emit: true
+          /* Because it seems Windows will set the U digit (UGO) for all spots, so '400' => '444'. Default on Windows is: '666' */
+          mode: '444'
         },
-        files: ['tmp/custom_options_dir/']
+        src: ['tmp/custom_options_dir/']
       }
     },
 
     // Unit tests.
     nodeunit: {
       all: ['test/*_test.js']
-    },
-    
-    
+    }
 
   });
 
@@ -104,7 +106,8 @@ module.exports = function(grunt) {
   
   // Test setup
   grunt.registerTask('test-setup', function() {
-    grunt.file.mkdir('tmp');
+    grunt.file.mkdir('tmp/custom_options_dir');
+    grunt.file.write('tmp/custom_options_file.js', '');
   });
   
   // Test emission listeners
@@ -130,7 +133,7 @@ module.exports = function(grunt) {
     });
   });
   grunt.registerTask('listeners-off', function() {
-    grunt.file.write('tmp/' + taskTargetName + '.json', JSON.stringify(emissions));
+    grunt.file.write('tmp/' + taskTargetName + '.json', JSON.stringify(emissions, null, 2));
     
     emissions.length = 0;
     grunt.event.removeAllListeners('chmod.*');
@@ -140,7 +143,8 @@ module.exports = function(grunt) {
         'default_options',
         'custom_options_without_string_mode', 
         'custom_options_with_empty_mode',
-        'custom_options_with_invalid_mode'
+        'custom_options_with_invalid_mode',
+        'custom_options_nonexistent_file'
       ];
   badConfigOptions.forEach(function(e, i) {
     grunt.registerTask(
@@ -186,6 +190,6 @@ module.exports = function(grunt) {
   );
 
   // By default: lint, run all tests, and clean it up.
-  grunt.registerTask('default', ['jshint', /*'test',*/ 'clean']);
+  grunt.registerTask('default', ['jshint', 'test', 'clean']);
 
 };

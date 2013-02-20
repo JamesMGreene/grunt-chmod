@@ -24,6 +24,7 @@ module.exports = function(grunt) {
     if (shouldEmit) {
       grunt.event.emit('chmod.taskTargetName', this.target);
     }
+
     var logError = createLogErrorFunc(shouldEmit);
     var taskFailure = createTaskFailureFunc(shouldEmit);
     var taskSuccess = createTaskSuccessFunc(shouldEmit);
@@ -56,7 +57,7 @@ module.exports = function(grunt) {
         fs.chmodSync(path, mode);
       }
       catch (e) {
-        logError('Failed to set `chmod` mode "' + mode + '" on dir/file: ' + path);
+        logError('Failed to set `chmod` mode "' + mode + '" on dir/file: ' + path + '\n' + e);
       }
     });
     
