@@ -191,5 +191,6 @@ module.exports = function(grunt) {
 
   // By default: lint, run all tests, and clean it up.
   grunt.registerTask('default', ['jshint', 'test', 'clean']);
-
+  // Travis-CI: lint, run all tests, and clean it up.
+  grunt.registerTask('travis', ['jshint', 'test', 'clean']);
 };
