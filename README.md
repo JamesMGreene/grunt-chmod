@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JamesMGreene/grunt-chmod.png)](https://travis-ci.org/JamesMGreene/grunt-chmod)
+
 # grunt-chmod
 
 > A Grunt task plugin to modify file permissions, a la `chmod`.
