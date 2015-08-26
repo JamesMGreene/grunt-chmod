@@ -8,6 +8,8 @@
 
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -77,26 +79,26 @@ module.exports = function(grunt) {
       },
       custom_options_file_symbolic_1: {
         options: {
-          mode: 'a-rwx,u+r' // 400
+          mode: 'u+r' // 400
         },
         src: ['tmp/custom_options_file_symbolic_1.js']
       },
       custom_options_file_symbolic_2: {
         options: {
-          mode: 'a-rwx,u+rw' // 600
+          mode: 'u+rw' // 600
         },
         src: ['tmp/custom_options_file_symbolic_2.js']
       },
       custom_options_file_symbolic_3: {
         options: {
-          mode: 'a-rwx,u+rwx' // 700
+          mode: 'u+rwx' // 700
         },
         src: ['tmp/custom_options_file_symbolic_3.js']
       },
 
       custom_options_file_symbolic_4: {
         options: {
-          mode: 'a-rwx,uo+r' // 404
+          mode: 'uo+r' // 404
         },
         src: ['tmp/custom_options_file_symbolic_4.js']
       },
@@ -134,10 +136,18 @@ module.exports = function(grunt) {
   grunt.registerTask('test-setup', function() {
     grunt.file.mkdir('tmp/custom_options_dir');
     grunt.file.write('tmp/custom_options_file.js', '');
+
     grunt.file.write('tmp/custom_options_file_symbolic_1.js', '');
     grunt.file.write('tmp/custom_options_file_symbolic_2.js', '');
     grunt.file.write('tmp/custom_options_file_symbolic_3.js', '');
     grunt.file.write('tmp/custom_options_file_symbolic_4.js', '');
+
+	fs.chmodSync('tmp/custom_options_file_symbolic_1.js', '000');
+	fs.chmodSync('tmp/custom_options_file_symbolic_2.js', '000');
+	fs.chmodSync('tmp/custom_options_file_symbolic_3.js', '000');
+	fs.chmodSync('tmp/custom_options_file_symbolic_4.js', '000');
+	
+
   });
   
   // Test emission listeners

@@ -100,7 +100,7 @@ exports.chmod = {
     var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_1.json');
     test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
     
-    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var rawMode = require('fs').statSync('tmp/custom_options_file_symbolic_1.js').mode;
     var numericMode = helpers.permsFromMode(rawMode);
     
     var actualPerms = '' + numericMode;
@@ -117,7 +117,7 @@ exports.chmod = {
     var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_2.json');
     test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
     
-    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var rawMode = require('fs').statSync('tmp/custom_options_file_symbolic_2.js').mode;
     var numericMode = helpers.permsFromMode(rawMode);
     
     var actualPerms = '' + numericMode;
@@ -134,7 +134,7 @@ exports.chmod = {
     var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_3.json');
     test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
     
-    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var rawMode = require('fs').statSync('tmp/custom_options_file_symbolic_3.js').mode;
     var numericMode = helpers.permsFromMode(rawMode);
     
     var actualPerms = '' + numericMode;
@@ -151,7 +151,7 @@ exports.chmod = {
     var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_4.json');
     test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
     
-    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var rawMode = require('fs').statSync('tmp/custom_options_file_symbolic_4.js').mode;
     var numericMode = helpers.permsFromMode(rawMode);
     
     var actualPerms = '' + numericMode;
