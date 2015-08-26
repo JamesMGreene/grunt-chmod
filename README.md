@@ -44,11 +44,12 @@ grunt.initConfig({
 Type: `String`
 Default value: _none_ (required)
 
-A string value to specify the permissions' [numeric mode](http://ss64.com/bash/chmod.html) to set on the files and/or directories, e.g.:
+A string value to specify the permissions' [`chmod`-style numeric or symbolic mode](http://ss64.com/bash/chmod.html) to set on the files and/or directories, e.g.:
  - `'755'`
  - `'644'`
  - `'400'`
-
+ - `'a+X'`
+ - `'ug+rw'`
 
 ### Usage Examples
 
@@ -100,7 +101,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
  - 1.0.3: Published to NPM on 2013-02-20.
      - Initial release, plus fixed tests and README.
- 
+
 ## License
-Copyright (c) 2013 James M. Greene  
+Copyright (c) 2013 James M. Greene
 Licensed under the MIT license.
