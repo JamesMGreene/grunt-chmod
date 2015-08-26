@@ -56,7 +56,7 @@ module.exports = function(grunt) {
       
       // Write the destination file.
       try {
-		shelljs.chmod(mode, path);	// was fs.chmodSync(path, mode);
+        shelljs.chmod(mode, path);	// was fs.chmodSync(path, mode);
       }
       catch (e) {
         logError('Failed to set `chmod` mode "' + mode + '" on dir/file: ' + path + '\n' + e);
