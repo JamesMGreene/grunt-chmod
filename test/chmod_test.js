@@ -91,6 +91,73 @@ exports.chmod = {
     test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
 
     test.done();
-  }
+  },
 
+  custom_options_file_symbolic_1: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/custom_options_file_symbolic_1.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_1.json');
+    test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
+    
+    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var numericMode = helpers.permsFromMode(rawMode);
+    
+    var actualPerms = '' + numericMode;
+    var expectedPerms = '400';
+    test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
+
+    test.done();
+  },
+
+  custom_options_file_symbolic_2: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/custom_options_file_symbolic_2.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_2.json');
+    test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
+    
+    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var numericMode = helpers.permsFromMode(rawMode);
+    
+    var actualPerms = '' + numericMode;
+    var expectedPerms = '600';
+    test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
+
+    test.done();
+  },
+
+  custom_options_file_symbolic_3: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/custom_options_file_symbolic_3.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_3.json');
+    test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
+    
+    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var numericMode = helpers.permsFromMode(rawMode);
+    
+    var actualPerms = '' + numericMode;
+    var expectedPerms = '700';
+    test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
+
+    test.done();
+  },
+
+  custom_options_file_symbolic_4: function(test) {
+    test.expect(2);
+
+    var actual = grunt.file.readJSON('tmp/custom_options_file_symbolic_4.json');
+    var expected = grunt.file.readJSON('test/expected/custom_options_file_symbolic_4.json');
+    test.deepEqual(actual, expected, 'Task should pass and modify the file permissions of all files that match.');
+    
+    var rawMode = require('fs').statSync('tmp/custom_options_file.js').mode;
+    var numericMode = helpers.permsFromMode(rawMode);
+    
+    var actualPerms = '' + numericMode;
+    var expectedPerms = '404';
+    test.strictEqual(actualPerms, expectedPerms, 'Permissions should match.');
+
+    test.done();
+  }  
 };
