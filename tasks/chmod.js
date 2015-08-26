@@ -8,6 +8,8 @@
 
 'use strict';
 
+var shelljs = require('shelljs');
+
 module.exports = function(grunt) {
 
   // Please see the Grunt documentation for more information regarding task
@@ -54,7 +56,7 @@ module.exports = function(grunt) {
       
       // Write the destination file.
       try {
-        fs.chmodSync(path, mode);
+		shelljs.chmod(mode, path);	// was fs.chmodSync(path, mode);
       }
       catch (e) {
         logError('Failed to set `chmod` mode "' + mode + '" on dir/file: ' + path + '\n' + e);
