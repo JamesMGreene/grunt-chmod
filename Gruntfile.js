@@ -8,6 +8,8 @@
 
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -74,7 +76,33 @@ module.exports = function(grunt) {
           mode: '444'
         },
         src: ['tmp/custom_options_dir/']
-      }
+      },
+      custom_options_file_symbolic_1: {
+        options: {
+          mode: 'u+r' // 400
+        },
+        src: ['tmp/custom_options_file_symbolic_1.js']
+      },
+      custom_options_file_symbolic_2: {
+        options: {
+          mode: 'u+rw' // 600
+        },
+        src: ['tmp/custom_options_file_symbolic_2.js']
+      },
+      custom_options_file_symbolic_3: {
+        options: {
+          mode: 'u+rwx' // 700
+        },
+        src: ['tmp/custom_options_file_symbolic_3.js']
+      },
+
+      custom_options_file_symbolic_4: {
+        options: {
+          mode: 'uo+r' // 404
+        },
+        src: ['tmp/custom_options_file_symbolic_4.js']
+      },
+
     },
 
     // Unit tests.
@@ -108,6 +136,18 @@ module.exports = function(grunt) {
   grunt.registerTask('test-setup', function() {
     grunt.file.mkdir('tmp/custom_options_dir');
     grunt.file.write('tmp/custom_options_file.js', '');
+
+    grunt.file.write('tmp/custom_options_file_symbolic_1.js', '');
+    grunt.file.write('tmp/custom_options_file_symbolic_2.js', '');
+    grunt.file.write('tmp/custom_options_file_symbolic_3.js', '');
+    grunt.file.write('tmp/custom_options_file_symbolic_4.js', '');
+
+	fs.chmodSync('tmp/custom_options_file_symbolic_1.js', '000');
+	fs.chmodSync('tmp/custom_options_file_symbolic_2.js', '000');
+	fs.chmodSync('tmp/custom_options_file_symbolic_3.js', '000');
+	fs.chmodSync('tmp/custom_options_file_symbolic_4.js', '000');
+	
+
   });
   
   // Test emission listeners
@@ -160,7 +200,11 @@ module.exports = function(grunt) {
   });
   var goodConfigOptions = [
         'custom_options_file',
-        'custom_options_dir'
+        'custom_options_dir',
+		'custom_options_file_symbolic_1',
+		'custom_options_file_symbolic_2',
+		'custom_options_file_symbolic_3',
+		'custom_options_file_symbolic_4'
       ];
   goodConfigOptions.forEach(function(e, i) {
     grunt.registerTask(

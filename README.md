@@ -44,11 +44,13 @@ grunt.initConfig({
 Type: `String`
 Default value: _none_ (required)
 
-A string value to specify the permissions' [numeric mode](http://ss64.com/bash/chmod.html) to set on the files and/or directories, e.g.:
+A string value to specify the permissions' [numeric mode](http://ss64.com/bash/chmod.html) to set on the files and/or directories. Alternatively, you may specify a change to be made to the permissions
+ using chmod's symbolic notation, e.g.:
  - `'755'`
  - `'644'`
  - `'400'`
-
+ - `'a+X'`
+ - `'ug+rw'`
 
 ### Usage Examples
 
