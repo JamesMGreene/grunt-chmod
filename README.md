@@ -98,4 +98,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
 Copyright (c) 2013-2015 James M. Greene
+
 Licensed under the MIT license.
