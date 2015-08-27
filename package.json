@@ -21,6 +21,11 @@
       "url": "https://github.com/JamesMGreene/grunt-chmod/blob/master/LICENSE-MIT"
     }
   ],
+  "keywords": [
+    "gruntplugin",
+    "chmod",
+    "permissions"
+  ],
   "main": "Gruntfile.js",
   "engines": {
     "node": ">= 0.8.0"
@@ -28,18 +33,13 @@
   "scripts": {
     "test": "grunt travis --verbose"
   },
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt": "~0.4.0"
-  },
-  "keywords": [
-    "gruntplugin",
-    "chmod",
-    "permissions"
-  ],
   "dependencies": {
     "shelljs": "^0.5.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-nodeunit": "^0.4.1"
   }
 }
