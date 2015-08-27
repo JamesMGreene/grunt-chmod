@@ -98,9 +98,6 @@ grunt.initConfig({
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
-## Release History
- - 1.0.3: Published to NPM on 2013-02-20.
-     - Initial release, plus fixed tests and README.
 
 ## License
 Copyright (c) 2013 James M. Greene
