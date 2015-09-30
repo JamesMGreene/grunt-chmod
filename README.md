@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/JamesMGreene/grunt-chmod.png)](https://travis-ci.org/JamesMGreene/grunt-chmod)
+[![Build Status](https://travis-ci.org/JamesMGreene/grunt-chmod.png?branch=master)](https://travis-ci.org/JamesMGreene/grunt-chmod)
 
 # grunt-chmod
 
