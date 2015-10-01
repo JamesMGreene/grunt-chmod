@@ -1,12 +1,12 @@
 {
   "name": "grunt-chmod",
   "description": "A Grunt task plugin to modify file permissions, a la `chmod`.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/JamesMGreene/grunt-chmod",
   "author": {
     "name": "James M. Greene",
     "email": "james.m.greene@gmail.com",
-    "url": "http://jamesgreene.net/"
+    "url": "http://greene.io/"
   },
   "repository": {
     "type": "git",
