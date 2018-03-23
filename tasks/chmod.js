@@ -19,6 +19,7 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       mode: '',
+      flags: '',
       emit: false
     });
 
@@ -32,6 +33,7 @@ module.exports = function(grunt) {
     var taskSuccess = createTaskSuccessFunc(shouldEmit);
 
     var mode = options.mode;
+    var flags = options.flags; 
 
     // If there isn't any mode to set, then bail out
     if (!mode) {
@@ -41,6 +43,11 @@ module.exports = function(grunt) {
     // If the mode set wasn't a string, then bail out
     if (typeof mode !== 'string') {
       logError('The `mode` specified in the task `options` was not a string. Task failed!');
+      return taskFailure();
+    }
+    // If the flags set wasn't a string, then bail out
+    if (typeof flags !== 'string') {
+      logError('The `flags` specified in the task `options` was not a string. Task failed!');
       return taskFailure();
     }
 
@@ -56,7 +63,7 @@ module.exports = function(grunt) {
 
       // Write the destination file.
       try {
-        shelljs.chmod(mode, path);  //fs.chmodSync(path, mode);
+        shelljs.chmod("-" + flags, mode, path);  //fs.chmodSync(path, mode);
       }
       catch (e) {
         logError('Failed to set `chmod` mode "' + mode + '" on dir/file: ' + path + '\n' + e);

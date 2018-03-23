@@ -28,7 +28,8 @@ In your project's Gruntfile, add a section named `chmod` to the data object pass
 grunt.initConfig({
   chmod: {
     options: {
-      mode: '755'
+      mode: '755',
+      flags: 'R'
     },
     yourTarget1: {
       // Target-specific file/dir lists and/or options go here.
@@ -50,6 +51,13 @@ A string value to specify the permissions' [`chmod`-style numeric or symbolic mo
  - `'400'`
  - `'a+X'`
  - `'ug+rw'`
+
+#### options.flags
+Type: `String`
+Default value: _none_ (optional)
+
+A string value to specify flags used when triggering the chmod command e.g.:
+ - `'R'`
 
 ### Usage Examples
 
