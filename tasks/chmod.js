@@ -33,7 +33,7 @@ module.exports = function(grunt) {
     var taskSuccess = createTaskSuccessFunc(shouldEmit);
 
     var mode = options.mode;
-    var flags = options.flags;
+    var flags = options.flags; 
 
     // If there isn't any mode to set, then bail out
     if (!mode) {
