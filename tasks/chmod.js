@@ -15,7 +15,11 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('chmod', 'Modify file permissions, a la `chmod`.', function() {
+  var createTaskSuccessFunc;
+  var createLogErrorFunc;
+  var createTaskFailureFunc;
+
+  grunt.registerMultiTask('chmod', 'Modify file permissions, a la `chmod`.', function () {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       mode: '',
@@ -48,7 +52,7 @@ module.exports = function(grunt) {
     var files = this.filesSrc;
 
     // Iterate over all specified file groups.
-    files.forEach(function(path) {
+    files.forEach(function (path) {
       // Warn on and remove invalid source files (if nonull was set).
       if (!grunt.file.exists(path)) {
         logError('Source dir/file "' + path + '" not found.');
@@ -57,8 +61,7 @@ module.exports = function(grunt) {
       // Write the destination file.
       try {
         shelljs.chmod(mode, path);  //fs.chmodSync(path, mode);
-      }
-      catch (e) {
+      } catch (e) {
         logError('Failed to set `chmod` mode "' + mode + '" on dir/file: ' + path + '\n' + e);
       }
     });
@@ -73,38 +76,39 @@ module.exports = function(grunt) {
     return taskSuccess();
   });
 
-  var createLogErrorFunc = function(shouldEmit) {
+
+  createLogErrorFunc = function (shouldEmit) {
     if (shouldEmit) {
-      return function(errorMsg) {
+      return function (errorMsg) {
         grunt.event.emit('chmod.error', errorMsg);
         grunt.log.error(errorMsg);
       };
     }
-    return function(errorMsg) {
+    return function (errorMsg) {
       grunt.log.error(errorMsg);
     };
   };
 
-  var createTaskFailureFunc = function(shouldEmit) {
+  createTaskFailureFunc = function (shouldEmit) {
     if (shouldEmit) {
-      return function() {
+      return function () {
         grunt.event.emit('chmod.fail');
         return false;
       };
     }
-    return function() {
+    return function () {
       return false;
     };
   };
 
-  var createTaskSuccessFunc = function(shouldEmit) {
+  createTaskSuccessFunc = function (shouldEmit) {
     if (shouldEmit) {
-      return function() {
+      return function () {
         grunt.event.emit('chmod.success');
         return true;
       };
     }
-    return function() {
+    return function () {
       return true;
     };
   };
